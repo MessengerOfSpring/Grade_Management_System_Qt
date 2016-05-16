@@ -1,0 +1,36 @@
+create schema `grade_manage`;
+use grade_manage;
+set autocommit=0;
+
+create table `student`
+(
+`s_id` varchar(40) not null,
+`psw` varchar(40) not null,
+`s_name` varchar(40) not null,
+`s_degree` enum('undergraduate','master','phd') not null,
+primary key(`s_id`)
+);
+
+create table `course`
+(
+`course_id` varchar(40) not null,
+`course_name` varchar(40) not null,
+primary key(`course_id`)
+);
+
+create table `admin`
+(
+`admin_id` varchar(40) not null,
+`psw` varchar(40) not null,
+`admin_name` varchar(40) not null,
+primary key(`admin_id`)
+);
+
+create table `grade`
+(
+`s_id` varchar(40) not null,
+`course_id` varchar(40) not null,
+`grade` int not null,
+foreign key(`s_id`) references `student`(`s_id`) on delete cascade on update cascade,
+foreign key(`course_id`) references `course`(`course_id`) on delete cascade on update cascade
+);
