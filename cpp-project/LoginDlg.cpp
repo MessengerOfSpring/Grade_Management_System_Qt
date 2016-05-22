@@ -36,10 +36,12 @@ void LoginDlg::on_Login_clicked()
 {
     std::string ErrorMsg;
 
+    // if both ID and password are valid
     if(Check(m_Info->ID.toStdString(), m_Info->Password.toStdString(), m_Info->Type, ErrorMsg))
     {
         accept();
     }
+    // if ID or password is not valid
     else
     {
         QMessageBox::warning(this, tr("Warning"), tr(ErrorMsg.c_str()));

@@ -6,6 +6,7 @@ AdminMainWindow::AdminMainWindow(QString ID, QString Password, QWidget *parent) 
     ui(new Ui::AdminMainWindow)
 {
     ui->setupUi(this);
+    setWindowTitle(tr("学生成绩管理系统"));
 }
 
 AdminMainWindow::~AdminMainWindow()
