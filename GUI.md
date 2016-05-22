@@ -18,6 +18,8 @@
 ![Warning1_screenshot](https://code.csdn.net/bu2_int/cpp-project/blob/master/screenshots/Warning-1.png)
 ![Warning2_screenshot](https://code.csdn.net/bu2_int/cpp-project/blob/master/screenshots/Warning-2.png)
 
+测试的学生ID为123456,密码为654321；管理员ID为12345678,密码为87654321。（在Check.h中定义）
+
 <h2 id="Student">学生界面</h2>
 
 //TODO
