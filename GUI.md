@@ -28,3 +28,7 @@
 
 //TODO
 
+<center>Copyright
+&copy;
+2016 章世超 李博奥 徐帅 梁鹏. All Rights Reserved</center>
+
