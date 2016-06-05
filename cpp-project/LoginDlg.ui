@@ -75,9 +75,23 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
-            <widget class="QRadioButton" name="student">
+            <widget class="QRadioButton" name="under">
              <property name="text">
-              <string>学生</string>
+              <string>本科生</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="post">
+             <property name="text">
+              <string>硕士生</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="doc">
+             <property name="text">
+              <string>博士生</string>
              </property>
             </widget>
            </item>

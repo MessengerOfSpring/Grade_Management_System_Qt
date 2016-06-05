@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <QString>
 
-enum LoginType{STUDENT, ADMIN};
+enum LoginType{UNDERGRADUATE, POSTGRADUATE, DOCTORAL, ADMIN};
 struct LoginInfo
 {
     QString ID;
@@ -23,9 +23,9 @@ class LoginDlg : public QDialog
 private slots:
     void on_Login_clicked();
     void on_Quit_clicked();
-    void on_ID_textEdited(const QString &arg1);
-    void on_Password_textEdited(const QString &arg1);
-    void on_student_clicked();
+    void on_under_clicked();
+    void on_post_clicked();
+    void on_doc_clicked();
     void on_admin_clicked();
 
 public:

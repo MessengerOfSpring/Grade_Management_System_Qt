@@ -6,6 +6,8 @@
 #include "LoginDlg.h"
 #include "Check.h"
 #include "ui_LoginDlg.h"
+#include<QSqlDatabase>
+#include <QSqlQuery>
 
 LoginDlg::LoginDlg(QWidget *parent) :
     QDialog(parent),
@@ -16,14 +18,29 @@ LoginDlg::LoginDlg(QWidget *parent) :
     m_Info = new LoginInfo;
     m_Info->ID = "";
     m_Info->Password = "";
-    m_Info->Type = STUDENT;
+    m_Info->Type = UNDERGRADUATE;
+
+    //connect to database
+    QSqlDatabase db=QSqlDatabase::addDatabase("QMYSQL");
+    db.setHostName("localhost");
+    db.setDatabaseName("grade_manage");
+    db.setUserName("Peng.Liang");
+    db.setPassword("241113l22769");//你的mysql密码可能是空***********
+    bool ok=db.open();
+    if(ok){
+        //QMessageBox::information(NULL,"提示","连接数据库成功");
+    }
+    else{
+        QMessageBox::information(NULL,"提示","连接数据库失败");
+        qApp->quit();
+    }
 
     setWindowTitle(tr("登录"));
 
     // Do not show password
     ui->Password->setEchoMode(QLineEdit::Password);
 
-    ui->student->setChecked(true);
+    ui->under->setChecked(true);
 }
 
 LoginDlg::~LoginDlg()
@@ -34,17 +51,22 @@ LoginDlg::~LoginDlg()
 
 void LoginDlg::on_Login_clicked()
 {
-    std::string ErrorMsg;
+    QString ErrorMsg;
+
+    // get ID and remove the spaces
+    m_Info->ID = ui->ID->text().trimmed();
+    // get Password but do not remove the spaces
+    m_Info->Password = ui->Password->text();
 
     // if both ID and password are valid
-    if(Check(m_Info->ID.toStdString(), m_Info->Password.toStdString(), m_Info->Type, ErrorMsg))
+    if(Check(m_Info->ID, m_Info->Password, m_Info->Type, ErrorMsg))
     {
         accept();
     }
     // if ID or password is not valid
     else
     {
-        QMessageBox::warning(this, tr("Warning"), tr(ErrorMsg.c_str()));
+        QMessageBox::warning(this, "警告",ErrorMsg);
         m_Info->ID = "";
         m_Info->Password = "";
         ui->ID->clear();
@@ -58,19 +80,19 @@ void LoginDlg::on_Quit_clicked()
     qApp->quit();
 }
 
-void LoginDlg::on_ID_textEdited(const QString &arg1)
+void LoginDlg::on_under_clicked()
 {
-    m_Info->ID = arg1;
+    m_Info->Type = UNDERGRADUATE;
 }
 
-void LoginDlg::on_Password_textEdited(const QString &arg1)
+void LoginDlg::on_post_clicked()
 {
-    m_Info->Password = arg1;
+    m_Info->Type = POSTGRADUATE;
 }
 
-void LoginDlg::on_student_clicked()
+void LoginDlg::on_doc_clicked()
 {
-    m_Info->Type = STUDENT;
+    m_Info->Type = DOCTORAL;
 }
 
 void LoginDlg::on_admin_clicked()
