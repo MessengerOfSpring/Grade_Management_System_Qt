@@ -28,6 +28,6 @@
 #define VALID_ADMIN_ID       "12345678"
 #define VALID_ADMIN_PASSWORD "87654321"
 
-bool Check(const std::string ID, const std::string Password, const LoginType Type, std::string& ErrorMsg);
+bool Check(const QString& ID, const QString& Password, const LoginType Type, QString& ErrorMsg);
 
 #endif

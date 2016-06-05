@@ -16,27 +16,50 @@
 
 #include <string>
 #include "Check.h"
-using namespace std;
-
+#include<QSqlDatabase>
+#include <QSqlQuery>
+#include <QMessageBox>
+#include <QString>
 
 // ===  FUNCTION  ======================================================================
 //         Name:  Check
 //  Description:  Check ID and password
 // =====================================================================================
-bool Check(const string ID, const string Password, const LoginType Type, string& ErrorMsg)
+bool Check(const QString& ID, const QString& Password, const LoginType Type, QString& ErrorMsg)
 {
     switch(Type)
     {
-        case STUDENT:
+        case UNDERGRADUATE:
         {
-            if(ID != VALID_STU_ID)
-            {
-                ErrorMsg = "用户名不存在！";
+            QSqlQuery query1;
+            query1.exec("select s_id from student where s_id = '"+ID+"' and psw = '"
+                        +Password+"' and s_degree = 'undergraduate'");
+            if(!query1.next()){
+                ErrorMsg="用户名或密码错误";
                 return false;
             }
-            else if(Password != VALID_STU_PASSWORD)
-            {
-                ErrorMsg = "密码错误！";
+            else
+                return true;
+        } break;
+        case POSTGRADUATE:
+        {
+            QSqlQuery query1;
+            query1.exec("select s_id from student where s_id = '"+ID+"' and psw = '"
+                        +Password+"' and s_degree = 'master'");
+            if(!query1.next()){
+                ErrorMsg="用户名或密码错误";
+                return false;
+            }
+            else
+                return true;
+        } break;
+        case DOCTORAL:
+        {
+            QSqlQuery query1;
+            query1.exec("select s_id from student where s_id = '"+ID+"' and psw = '"
+                        +Password+"' and s_degree = 'phd'");
+            if(!query1.next()){
+                ErrorMsg="用户名或密码错误";
                 return false;
             }
             else
@@ -44,14 +67,10 @@ bool Check(const string ID, const string Password, const LoginType Type, string&
         } break;
         case ADMIN:
         {
-            if(ID != VALID_ADMIN_ID)
-            {
-                ErrorMsg = "用户名不存在！";
-                return false;
-            }
-            else if(Password != VALID_ADMIN_PASSWORD)
-            {
-                ErrorMsg = "密码错误！";
+            QSqlQuery query1;
+            query1.exec("select admin_id from admin where admin_id = '"+ID+"' and psw = '"+Password+"'");
+            if(!query1.next()){
+                ErrorMsg="用户名或密码错误";
                 return false;
             }
             else
