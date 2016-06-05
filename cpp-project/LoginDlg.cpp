@@ -24,8 +24,8 @@ LoginDlg::LoginDlg(QWidget *parent) :
     QSqlDatabase db=QSqlDatabase::addDatabase("QMYSQL");
     db.setHostName("localhost");
     db.setDatabaseName("grade_manage");
-    db.setUserName("Peng.Liang");
-    db.setPassword("241113l22769");//你的mysql密码可能是空***********
+    db.setUserName("root");
+    db.setPassword("root");//你的mysql密码可能是空***********
     bool ok=db.open();
     if(ok){
         //QMessageBox::information(NULL,"提示","连接数据库成功");
