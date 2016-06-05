@@ -16,7 +16,6 @@
 上图为登陆界面，用户名用于输入ID，密码用于输入Password（不回显），下面的单选按钮可以选择以学生身份(分为本科生、研究生、博士生)登录还是以管理员身份登录。按登录按钮登录，若用户名和密码正确，则进入学生界面或者管理员界面；否则会给出Warning，点击OK后用户名和密码都会清空，需重新输入。按退出按钮则直接退出程序。
 
 ![Warning1_screenshot](https://code.csdn.net/bu2_int/cpp-project/blob/master/screenshots/Warning-1.png)
-![Warning2_screenshot](https://code.csdn.net/bu2_int/cpp-project/blob/master/screenshots/Warning-2.png)
 
 <h2 id="Student">学生界面</h2>
 
@@ -37,6 +36,8 @@
 点击确定进行查询并显示出查询结果，点击取消则直接退出查询界面。
 
 显示出成绩后可以右键选择编辑成绩或者删除成绩。注意这里的编辑成绩只能修改分数，其他信息不能修改。删除成绩时会提示确认。
+
+![Warning2_screenshot](https://code.csdn.net/bu2_int/cpp-project/blob/master/screenshots/Warning-2.png)
 
 ![Add](https://code.csdn.net/bu2_int/cpp-project/blob/master/screenshots/Add.png)
 
