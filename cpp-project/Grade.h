@@ -20,6 +20,7 @@
 #define __GRADE_H__
 
 #include <vector>
+#include <QString>
 
 // Those definitions are just for testing
 #define TEST_STUDENTID "s001"
@@ -40,10 +41,30 @@ struct GradeInfo
 enum QueryField 
 {
     STUDENTID,
-    COURSEID,
-    COURSENAME
+    COURSENAME,
+    COURSEID
 };				/* ----------  end of enum QueryField  ---------- */
 
+enum FieldRelation 
+{
+    EQUAL,
+    CONTAIN
+};				/* ----------  end of enum FieldRelation  ---------- */
+
+struct Condition 
+{
+    QueryField Field;
+    FieldRelation Relation;
+    QString Key;
+};				/* ----------  end of struct Condition  ---------- */
+
+enum ConditionRelation 
+{
+    AND,
+    OR
+};				/* ----------  end of enum ConditionRelation  ---------- */
+
+typedef enum ConditionRelation ConditionRelation;
 /*
  * =====================================================================================
  *        Class:  Grade
@@ -58,19 +79,18 @@ public:
     ~Grade();                            /* destructor       */
 
 	/* ====================  ACCESSORS     ======================================= */
-    std::vector<GradeInfo>& getInfo() const;
+    const std::vector<GradeInfo>& getInfo() const;
 
 	/* ====================  MUTATORS      ======================================= */
 
 	/* ====================  METHODS       ======================================= */
-    void query(const QString& Key, const QueryField Field = STUDENTID);
+    bool query(const Condition& Condition1, const Condition& Condition2,
+            const ConditionRelation& Relation, QString& ErrorMsg);
+    bool deleteGrade(const GradeInfo& Info, QString& ErrorMsg);
+    bool updateGrade(const GradeInfo& Info, QString& ErrorMsg);
+    bool insertGrade(const GradeInfo& Info, QString& ErrorMsg);
 
 private:
-	/* ====================  METHODS       ======================================= */
-    void queryStudentID(const QString& StudentID);
-    void queryCourseID(const QString& CourseID);
-    void queryCourseName(const QString& CourseName);
-
 	/* ====================  DATA MEMBERS  ======================================= */
     std::vector<GradeInfo> m_Info;
 

@@ -41,59 +41,84 @@ Grade::~Grade ()
 //       Class:  Grade
 //    Accessor:  getInfo
 //--------------------------------------------------------------------------------------
-vector<Grade>& Grade::getInfo() const
+const vector<GradeInfo>& Grade::getInfo() const
 {
-	return m_Info;
+    return m_Info;
 }		// -----  end of accessor Grade::getInfo  ----- 
 
 //--------------------------------------------------------------------------------------
 //       Class:  Grade
 //      Method:  query
-// Description:  
+// Description:  query grade from database
+//               Condition: Field: STUDENTID, COURSENAME, COURSEID -- which field to query
+//                          FieldRelation: EQUAL or CONTAIN -- Field = Key or Field like %Key%
+//                          Key -- the query key
+//               ConditionRelation: AND or OR -- the relationship of Condition1 and Condition2
 //--------------------------------------------------------------------------------------
-void Grade::query(const QString& Key, const QueryField Field)
+bool Grade::query(const Condition& Condition1, const Condition& Condition2,
+                  const ConditionRelation& Relation, QString& ErrorMsg)
 {
+    // if GradeInfo is not empty, then clean it
     if(m_Info.size() != 0)
         vector<GradeInfo>().swap(m_Info);
-    switch(Field)
+
+    // if both conditions are empty
+    if(Condition1.Key == "" && Condition2.Key == "")
     {
-        case STUDENTID : queryStudentID(Key) ; break;
-        case COURSEID  : queryCourseID(Key)  ; break;
-        case COURSENAME: queryCourseName(Key); break;
+        return true;
+    }
+    // if just one of the conditions is empty
+    else if(Condition1.Key == "" || Condition2.Key == "")
+    {
+    }
+    // if both conditions are not empty
+    else
+    {
+        // those are just for test, which should be deleted after completing
+        GradeInfo Info1, Info2;
+        Info1.StudentID = TEST_STUDENTID;
+        Info1.StudentName = TEST_STUDENTNAME;
+        Info1.CourseID = QString(TEST_COURSEID) + "1";
+        Info1.CourseName = QString(TEST_COURSENAME) + "1";
+        Info1.Score = TEST_SCORE;
+        Info2.StudentID = TEST_STUDENTID;
+        Info2.StudentName = TEST_STUDENTNAME;
+        Info2.CourseID = QString(TEST_COURSEID) + "2";
+        Info2.CourseName = QString(TEST_COURSENAME) + "2";
+        Info2.Score = TEST_SCORE;
+        m_Info.push_back(Info1);
+        m_Info.push_back(Info2);
+        return true;
     }
 }		// -----  end of method Grade::query  ----- 
 
 //--------------------------------------------------------------------------------------
 //       Class:  Grade
-//      Method:  queryStudentID
-// Description:  
+//      Method:  deleteGrade
+// Description:  delete the information of grade from database
 //--------------------------------------------------------------------------------------
-void Grade::queryStudentID(const QString& StudentID)
+bool Grade::deleteGrade(const GradeInfo& Info, QString& ErrorMsg)
 {
-    GradeInfo Info;
-    Info.StudentID = TEST_STUDENTID;
-    Info.StudentName = TEST_STUDENTNAME;
-    Info.CourseID = TEST_COURSEID;
-    Info.CourseName = TEST_COURSENAME;
-    Info.Score = TEST_SCORE;
-    m_Info.push_back(Info);
-}		// -----  end of method Grade::queryStudentID  ----- 
+    return true;
+}		// -----  end of method Grade::deleteGrade  ----- 
 
 //--------------------------------------------------------------------------------------
 //       Class:  Grade
-//      Method:  queryCourseID
-// Description:  
+//      Method:  updateGrade
+// Description:  update the information(only score) of grade in the database
 //--------------------------------------------------------------------------------------
-void Grade::queryCourseID(const QString& CourseID)
+bool Grade::updateGrade(const GradeInfo& Info, QString& ErrorMsg)
 {
-}		// -----  end of method Grade::queryCourseID  ----- 
+    return true;
+}		// -----  end of method Grade::updateGrade  ----- 
 
 //--------------------------------------------------------------------------------------
 //       Class:  Grade
-//      Method:  queryCourseName
-// Description:  
+//      Method:  insertGrade
+// Description:  insert GradeInfo(only contain StudentID, CourseID, Score) into the database
 //--------------------------------------------------------------------------------------
-void Grade::queryCourseName(const QString& CourseName)
+bool Grade::insertGrade(const GradeInfo& Info, QString& ErrorMsg)
 {
-}		// -----  end of method Grade::queryCourseName  ----- 
+    return true;
+}		// -----  end of method Grade::insertGrade  ----- 
 
