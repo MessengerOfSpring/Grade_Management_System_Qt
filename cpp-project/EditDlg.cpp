@@ -1,15 +1,16 @@
-#include "Grade.h"
+﻿#include "Grade.h"
 #include "EditDlg.h"
 #include "ui_EditDlg.h"
 #include <QMessageBox>
+#include <QString>
 
 EditDlg::EditDlg(const QString& StudentName, const QString& CourseName, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::EditDlg)
 {
     ui->setupUi(this);
-    setWindowTitle("编辑成绩");
-    ui->label->setText("请输入" + StudentName + "同学在" + CourseName + "课程中新的成绩:");
+    setWindowTitle(QString::fromLocal8Bit("编辑成绩"));
+    ui->label->setText(QString::fromLocal8Bit("请输入") + StudentName + QString::fromLocal8Bit("同学在") + CourseName + QString::fromLocal8Bit("课程中新的成绩:"));
     ui->label->adjustSize();
 }
 
@@ -33,7 +34,7 @@ void EditDlg::on_Ok_clicked()
     m_NewScore = ui->NewScore->text().toUInt(&Ok, 10);
     if(!Ok || m_NewScore > 100)
     {
-        QMessageBox::warning(this, "警告", "成绩必须为0～100的整数！请重新输入");
+        QMessageBox::warning(this, QString::fromLocal8Bit("警告"), QString::fromLocal8Bit("成绩必须为0～100的整数！请重新输入"));
         ui->NewScore->clear();
         return;
     }

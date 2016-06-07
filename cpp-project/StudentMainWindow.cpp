@@ -1,4 +1,4 @@
-#include <QDateTime>
+﻿#include <QDateTime>
 #include <vector>
 #include "Grade.h"
 #include "StudentMainWindow.h"
@@ -9,11 +9,11 @@ StudentMainWindow::StudentMainWindow(QString ID, QWidget *parent) :
     ui(new Ui::StudentMainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle(tr("学生成绩管理系统"));
+    setWindowTitle(QString::fromLocal8Bit("学生成绩管理系统"));
 
     // set tablewidget
     QStringList Header;
-    Header << tr("课程号") << ("课程名称") << ("成绩");
+    Header << QString::fromLocal8Bit("课程号") << QString::fromLocal8Bit("课程名称") << QString::fromLocal8Bit("成绩");
     ui->tableWidget->setColumnCount(3);         // 3 columns
     ui->tableWidget->setHorizontalHeaderLabels(Header); // set horizontal header labels
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -23,8 +23,8 @@ StudentMainWindow::StudentMainWindow(QString ID, QWidget *parent) :
     ui->tableWidget->horizontalHeader()->setSectionsClickable(false); // horizontal header can't be clicked
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows); // set selection only rows
 
-    QString LabelInfo = ID + QString("同学，欢迎来到学生成绩管理系统！今天是") +
-            QDate::currentDate().toString("yyyy-MM-dd");
+    QString LabelInfo = ID + QString::fromLocal8Bit("同学，欢迎来到学生成绩管理系统！今天是") +
+           QDate::currentDate().toString("yyyy-MM-dd");
     ui->label->setText(LabelInfo);
     ui->label->adjustSize();
 

@@ -1,4 +1,4 @@
-#include <vector>
+﻿#include <vector>
 #include <QDateTime>
 #include <QMessageBox>
 #include "AdminMainWindow.h"
@@ -7,17 +7,22 @@
 #include "AddDlg.h"
 #include "EditDlg.h"
 #include "Grade.h"
-
+#include "AdminDlg.h"
+#include "UnderDlg.h"
+#include "MasterDlg.h"
+#include "PhdDlg.h"
+#include <QDebug>
+#include <QString>
 AdminMainWindow::AdminMainWindow(QString ID, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::AdminMainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle(tr("学生成绩管理系统"));
+    setWindowTitle(QString::fromLocal8Bit("学生成绩管理系统"));
 
     // set tablewidget
     QStringList Header;
-    Header << tr("学号") << tr("姓名") << tr("课程代码") << ("课程名称") << ("成绩");
+    Header << QString::fromLocal8Bit("学号") << QString::fromLocal8Bit("姓名") << QString::fromLocal8Bit("课程代码") << QString::fromLocal8Bit("课程名称") << QString::fromLocal8Bit("成绩");
     ui->tableWidget->setColumnCount(5);         // 5 columns
     ui->tableWidget->setHorizontalHeaderLabels(Header); // set horizontal header labels
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -27,19 +32,22 @@ AdminMainWindow::AdminMainWindow(QString ID, QWidget *parent) :
     ui->tableWidget->horizontalHeader()->setSectionsClickable(false); // horizontal header can't be clicked
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows); // set selection only rows
 
-    QString LabelInfo = ID + QString("老师，欢迎来到学生成绩管理系统！今天是") +
+    QString LabelInfo = ID + QString::fromLocal8Bit("老师，欢迎来到学生成绩管理系统！今天是") +
             QDate::currentDate().toString("yyyy-MM-dd");
     ui->label->setText(LabelInfo);
     ui->label->adjustSize();
 
     ui->tableWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     m_ContextMenu = new QMenu(ui->tableWidget);
-    m_DeleteAction = new QAction("删除成绩", this);
-    m_EditAction = new QAction("编辑成绩", this);
+    m_DeleteAction = new QAction(QString::fromLocal8Bit("删除成绩"), this);
+    m_EditAction = new QAction(QString::fromLocal8Bit("编辑成绩"), this);
     connect(ui->tableWidget, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenu(QPoint)));
     connect(m_DeleteAction, SIGNAL(triggered()), this, SLOT(deleteTuple()));
     connect(m_EditAction, SIGNAL(triggered()), this, SLOT(editTuple()));
-
+    connect(ui->actionAdmin, SIGNAL(triggered(bool)), this, SLOT(on_Enroll_admin()));
+    connect(ui->actionUnder,SIGNAL(triggered(bool)),this,SLOT(on_Enroll_under()));
+    connect(ui->actionMaster,SIGNAL(triggered(bool)),this,SLOT(on_Enroll_master()));
+    connect(ui->actionPhd,SIGNAL(triggered(bool)),this,SLOT(on_Enroll_phd()));
     m_Grade = new Grade;
 }
 
@@ -67,7 +75,7 @@ void AdminMainWindow::showGradeInfo()
     // If the result of query is empty, then show nothing
     if(Info.size() == 0)
     {
-        QMessageBox::information(this, "提示", "没有您要查找的成绩！");
+        QMessageBox::information(this, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("没有您要查找的成绩！"));
         return;
     }
 
@@ -120,7 +128,7 @@ void AdminMainWindow::on_Find_clicked()
         if(m_Grade->query(condition1, condition2, CRelation, ErrorMsg))
             showGradeInfo();
         else
-            QMessageBox::warning(this, "警告", ErrorMsg);
+            QMessageBox::warning(this, QString::fromLocal8Bit("警告"), ErrorMsg);
     }
 }
 
@@ -132,7 +140,7 @@ void AdminMainWindow::on_Add_clicked()
         GradeInfo info = add.getGradeInfo();
         QString ErrorMsg;
         if(!m_Grade->insertGrade(info, ErrorMsg))
-            QMessageBox::warning(this, "警告", ErrorMsg);
+            QMessageBox::warning(this, QString::fromLocal8Bit("警告"), ErrorMsg);
     }
 }
 
@@ -168,14 +176,14 @@ void AdminMainWindow::editTuple()
             ui->tableWidget->setItem(Row, 4, Score);
         }
         else
-            QMessageBox::warning(this, "警告", ErrorMsg);
+            QMessageBox::warning(this, QString::fromLocal8Bit("警告"), ErrorMsg);
     }
 }
 
 void AdminMainWindow::deleteTuple()
 {
     QMessageBox::StandardButton rb =
-            QMessageBox::warning(this, "警告", "您确定要删除这条成绩吗？删除后将无法撤销！",
+            QMessageBox::warning(this, QString::fromLocal8Bit("警告"), QString::fromLocal8Bit("您确定要删除这条成绩吗？删除后将无法撤销！"),
                                  QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Cancel);
     // if push "Cancel", then do nothing
     if(rb == QMessageBox::Cancel)
@@ -195,5 +203,31 @@ void AdminMainWindow::deleteTuple()
     if(m_Grade->deleteGrade(info, ErrorMsg)) // Delete from database
         ui->tableWidget->removeRow(Row); // Delete from the table
     else
-        QMessageBox::warning(this, "警告", ErrorMsg);
+        QMessageBox::warning(this, QString::fromLocal8Bit("警告"), ErrorMsg);
+}
+
+/*Details for Enroll*/
+void AdminMainWindow::on_Enroll_admin()
+{
+    AdminDlg admindlg;
+    admindlg.exec();
+}
+
+void AdminMainWindow::on_Enroll_under()
+{
+    UnderDlg underdlg;
+    underdlg.exec();
+
+}
+
+void AdminMainWindow::on_Enroll_master()
+{
+    MasterDlg masterdlg;
+    masterdlg.exec();
+}
+
+void AdminMainWindow::on_Enroll_phd()
+{
+    PhdDlg phddlg;
+    phddlg.exec();
 }

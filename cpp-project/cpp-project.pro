@@ -20,7 +20,11 @@ SOURCES += main.cpp\
     Grade.cpp \
     FindDlg.cpp \
     EditDlg.cpp \
-    AddDlg.cpp
+    AddDlg.cpp \
+    AdminDlg.cpp \
+    UnderDlg.cpp \
+    MasterDlg.cpp \
+    PhdDlg.cpp
 
 HEADERS  += LoginDlg.h \
     Check.h \
@@ -29,13 +33,24 @@ HEADERS  += LoginDlg.h \
     Grade.h \
     FindDlg.h \
     EditDlg.h \
-    AddDlg.h
+    AddDlg.h \
+    AdminDlg.h \
+    UnderDlg.h \
+    MasterDlg.h \
+    PhdDlg.h
 
 FORMS    += LoginDlg.ui \
     StudentMainWindow.ui \
     AdminMainWindow.ui \
     FindDlg.ui \
     EditDlg.ui \
-    AddDlg.ui
+    AddDlg.ui \
+    AdminDlg.ui \
+    UnderDlg.ui \
+    MasterDlg.ui \
+    PhdDlg.ui
 
 RC_FILE += ico.rc \
+
+RESOURCES += \
+    images.qrc

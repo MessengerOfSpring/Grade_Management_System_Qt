@@ -41,8 +41,15 @@
         </item>
         <item>
          <widget class="QPushButton" name="Find">
+          <property name="styleSheet">
+           <string notr="true">image:url(:/Menu/images/find.png)</string>
+          </property>
           <property name="text">
            <string>查询</string>
+          </property>
+          <property name="icon">
+           <iconset theme="find" resource="images.qrc">
+            <normaloff>:/Menu/images/find.png</normaloff>:/Menu/images/find.png</iconset>
           </property>
          </widget>
         </item>
@@ -51,12 +58,20 @@
           <property name="text">
            <string>添加</string>
           </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/Menu/images/add.png</normaloff>:/Menu/images/add.png</iconset>
+          </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="Quit">
           <property name="text">
            <string>退出</string>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/Menu/images/exit3.png</normaloff>:/Menu/images/exit3.png</iconset>
           </property>
          </widget>
         </item>
@@ -75,12 +90,72 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>25</height>
+     <height>23</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>注册</string>
+    </property>
+    <addaction name="actionAdmin"/>
+    <addaction name="actionUnder"/>
+    <addaction name="actionMaster"/>
+    <addaction name="actionPhd"/>
+   </widget>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionAdmin">
+   <property name="icon">
+    <iconset resource="images.qrc">
+     <normaloff>:/Menu/images/admin.png</normaloff>:/Menu/images/admin.png</iconset>
+   </property>
+   <property name="text">
+    <string>管理员</string>
+   </property>
+   <property name="toolTip">
+    <string>管理员注册</string>
+   </property>
+  </action>
+  <action name="actionUnder">
+   <property name="icon">
+    <iconset resource="images.qrc">
+     <normaloff>:/Menu/images/under.png</normaloff>:/Menu/images/under.png</iconset>
+   </property>
+   <property name="text">
+    <string>本科生</string>
+   </property>
+   <property name="toolTip">
+    <string>本科生注册</string>
+   </property>
+  </action>
+  <action name="actionMaster">
+   <property name="icon">
+    <iconset resource="images.qrc">
+     <normaloff>:/Menu/images/post.png</normaloff>:/Menu/images/post.png</iconset>
+   </property>
+   <property name="text">
+    <string>硕士生</string>
+   </property>
+   <property name="toolTip">
+    <string>硕士生注册</string>
+   </property>
+  </action>
+  <action name="actionPhd">
+   <property name="icon">
+    <iconset resource="images.qrc">
+     <normaloff>:/Menu/images/doctor.png</normaloff>:/Menu/images/doctor.png</iconset>
+   </property>
+   <property name="text">
+    <string>博士生</string>
+   </property>
+   <property name="toolTip">
+    <string>博士生注册</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -1,10 +1,11 @@
-#ifndef ADMINMAINWINDOW_H
+﻿#ifndef ADMINMAINWINDOW_H
 #define ADMINMAINWINDOW_H
 
 #include "Grade.h"
 #include <QMainWindow>
 #include <QMenu>
 #include <QAction>
+#include <qdialog.h>
 
 namespace Ui {
 class AdminMainWindow;
@@ -26,7 +27,10 @@ private slots:
     void contextMenu(const QPoint &Pos);
     void editTuple();
     void deleteTuple();
-
+    void on_Enroll_admin();
+    void on_Enroll_under();
+    void on_Enroll_master();
+    void on_Enroll_phd();
 private:
     Ui::AdminMainWindow *ui;
     QMenu *m_ContextMenu;

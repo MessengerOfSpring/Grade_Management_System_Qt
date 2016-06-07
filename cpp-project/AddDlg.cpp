@@ -1,13 +1,14 @@
-#include "AddDlg.h"
+﻿#include "AddDlg.h"
 #include "ui_AddDlg.h"
 #include <QMessageBox>
+#include <QString>
 
 AddDlg::AddDlg(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddDlg)
 {
     ui->setupUi(this);
-    setWindowTitle("添加成绩");
+    setWindowTitle(QString::fromLocal8Bit("添加成绩"));
     m_GradeInfo = new GradeInfo;
 }
 
@@ -35,17 +36,17 @@ void AddDlg::on_Ok_clicked()
     m_GradeInfo->Score     = ui->Score->text().toUInt(&Ok, 10);
     if(m_GradeInfo->StudentID == "")
     {
-        QMessageBox::warning(this, "警告", "学生学号为必填！");
+        QMessageBox::warning(this, QString::fromLocal8Bit("警告"), QString::fromLocal8Bit("学生学号为必填！"));
         return;
     }
     else if(m_GradeInfo->CourseID  == "")
     {
-        QMessageBox::warning(this, "警告", "课程代码为必填！");
+        QMessageBox::warning(this, QString::fromLocal8Bit("警告"), QString::fromLocal8Bit("课程代码为必填！"));
         return;
     }
     else if(!Ok || m_GradeInfo->Score > 100)
     {
-        QMessageBox::warning(this, "警告", "成绩为必填且为0～100的整数！");
+        QMessageBox::warning(this, QString::fromLocal8Bit("警告"), QString::fromLocal8Bit("成绩为必填且为0～100的整数！"));
         return;
     }
 

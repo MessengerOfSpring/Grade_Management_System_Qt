@@ -44,6 +44,10 @@
           <property name="text">
            <string>退出</string>
           </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/Menu/images/exit3.png</normaloff>:/Menu/images/exit3.png</iconset>
+          </property>
          </widget>
         </item>
        </layout>
@@ -61,11 +65,13 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>25</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>

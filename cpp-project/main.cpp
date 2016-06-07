@@ -1,4 +1,4 @@
-#include "LoginDlg.h"
+﻿#include "LoginDlg.h"
 #include "StudentMainWindow.h"
 #include "AdminMainWindow.h"
 #include <QApplication>
@@ -15,9 +15,11 @@ int main(int argc, char *argv[])
         switch(Info.Type)
         {
             // login as a student
-            case STUDENT:
+            case UNDERGRADUATE:
+            case POSTGRADUATE:
+            case DOCTORAL:
             {
-                StudentMainWindow Student(Info.ID, Info.Password);
+                StudentMainWindow Student(Info.ID);
                 Student.show();
 
                 return a.exec();
@@ -25,7 +27,7 @@ int main(int argc, char *argv[])
             // login as an administrator
             case ADMIN:
             {
-                AdminMainWindow Admin(Info.ID, Info.Password);
+                AdminMainWindow Admin(Info.ID);
                 Admin.show();
 
                 return a.exec();

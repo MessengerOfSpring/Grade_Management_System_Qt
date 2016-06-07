@@ -1,4 +1,4 @@
-#include "FindDlg.h"
+﻿#include "FindDlg.h"
 #include "ui_FindDlg.h"
 
 FindDlg::FindDlg(QWidget *parent) :
@@ -7,11 +7,11 @@ FindDlg::FindDlg(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setWindowTitle("查找成绩");
+    setWindowTitle(QString::fromLocal8Bit("查找成绩"));
 
     QStringList Fields, FieldRelations;
-    Fields << tr("学号") << tr("课程名称") << tr("课程代码");
-    FieldRelations << tr("等于") << tr("包含");
+    Fields << QString::fromLocal8Bit("学号") << QString::fromLocal8Bit("课程名称") << QString::fromLocal8Bit("课程代码");
+    FieldRelations <<QString::fromLocal8Bit("等于") << QString::fromLocal8Bit("包含");
     ui->Field1->addItems(Fields);
     ui->Field2->addItems(Fields);
     ui->FieldRelation1->addItems(FieldRelations);

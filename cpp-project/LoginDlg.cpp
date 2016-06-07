@@ -1,4 +1,4 @@
-#include <QMessageBox>
+﻿#include <QMessageBox>
 #include <QLineEdit>
 #include <QLabel>
 #include <QRadioButton>
@@ -6,8 +6,9 @@
 #include "LoginDlg.h"
 #include "Check.h"
 #include "ui_LoginDlg.h"
-#include<QSqlDatabase>
+#include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QString>
 
 LoginDlg::LoginDlg(QWidget *parent) :
     QDialog(parent),
@@ -25,17 +26,17 @@ LoginDlg::LoginDlg(QWidget *parent) :
     db.setHostName("localhost");
     db.setDatabaseName("grade_manage");
     db.setUserName("root");
-    db.setPassword("root");//你的mysql密码可能是空***********
+    db.setPassword("1996219");//你的mysql密码可能是空***********
     bool ok=db.open();
     if(ok){
         //QMessageBox::information(NULL,"提示","连接数据库成功");
     }
     else{
-        QMessageBox::information(NULL,"提示","连接数据库失败");
+        QMessageBox::information(NULL,QString::fromLocal8Bit("提示"),QString::fromLocal8Bit("连接数据库失败"));
         qApp->quit();
     }
 
-    setWindowTitle(tr("登录"));
+    setWindowTitle(QString::fromLocal8Bit(" 学生成绩管理系统"));
 
     // Do not show password
     ui->Password->setEchoMode(QLineEdit::Password);
@@ -66,7 +67,7 @@ void LoginDlg::on_Login_clicked()
     // if ID or password is not valid
     else
     {
-        QMessageBox::warning(this, "警告",ErrorMsg);
+        QMessageBox::warning(this, QString::fromLocal8Bit("警告"),ErrorMsg);
         m_Info->ID = "";
         m_Info->Password = "";
         ui->ID->clear();

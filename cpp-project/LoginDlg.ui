@@ -24,23 +24,18 @@
     <layout class="QGridLayout" name="gridLayout_2">
      <item row="0" column="0">
       <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="2" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-        <widget class="QLabel" name="label_3">
-         <property name="font">
-          <font>
-           <pointsize>30</pointsize>
-           <weight>75</weight>
-           <italic>false</italic>
-           <bold>true</bold>
-           <underline>false</underline>
-           <strikeout>false</strikeout>
-           <kerning>true</kerning>
-          </font>
+       <item row="3" column="1">
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
          </property>
-         <property name="text">
-          <string>学生成绩管理系统</string>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
          </property>
-        </widget>
+        </spacer>
        </item>
        <item row="3" column="2">
         <layout class="QVBoxLayout" name="verticalLayout">
@@ -79,12 +74,20 @@
              <property name="text">
               <string>本科生</string>
              </property>
+             <property name="icon">
+              <iconset resource="images.qrc">
+               <normaloff>:/Menu/images/under.png</normaloff>:/Menu/images/under.png</iconset>
+             </property>
             </widget>
            </item>
            <item>
             <widget class="QRadioButton" name="post">
              <property name="text">
               <string>硕士生</string>
+             </property>
+             <property name="icon">
+              <iconset resource="images.qrc">
+               <normaloff>:/Menu/images/post.png</normaloff>:/Menu/images/post.png</iconset>
              </property>
             </widget>
            </item>
@@ -93,12 +96,20 @@
              <property name="text">
               <string>博士生</string>
              </property>
+             <property name="icon">
+              <iconset resource="images.qrc">
+               <normaloff>:/Menu/images/doctor.png</normaloff>:/Menu/images/doctor.png</iconset>
+             </property>
             </widget>
            </item>
            <item>
             <widget class="QRadioButton" name="admin">
              <property name="text">
               <string>管理员</string>
+             </property>
+             <property name="icon">
+              <iconset resource="images.qrc">
+               <normaloff>:/Menu/images/admin.png</normaloff>:/Menu/images/admin.png</iconset>
              </property>
             </widget>
            </item>
@@ -167,19 +178,6 @@
          </item>
         </layout>
        </item>
-       <item row="3" column="1">
-        <spacer name="horizontalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
        <item row="3" column="3">
         <spacer name="horizontalSpacer_4">
          <property name="orientation">
@@ -189,19 +187,6 @@
           <size>
            <width>40</width>
            <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="4" column="2">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
           </size>
          </property>
         </spacer>
@@ -219,8 +204,39 @@
          </property>
         </spacer>
        </item>
+       <item row="1" column="2" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+        <widget class="QLabel" name="label_3">
+         <property name="font">
+          <font>
+           <pointsize>30</pointsize>
+           <weight>75</weight>
+           <italic>false</italic>
+           <bold>true</bold>
+           <underline>false</underline>
+           <strikeout>false</strikeout>
+           <kerning>true</kerning>
+          </font>
+         </property>
+         <property name="text">
+          <string>学生成绩管理系统</string>
+         </property>
+        </widget>
+       </item>
        <item row="2" column="2">
         <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="4" column="2">
+        <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -239,6 +255,8 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>
