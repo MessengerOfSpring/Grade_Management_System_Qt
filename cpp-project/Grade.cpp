@@ -9,13 +9,17 @@
 //       Revision:  none
 //       Compiler:  g++
 //
-//         Author:  TCX4C70, tcx4c70@zju.edu.cn
+//         Author:  TCX4C70, bu2_int
 //   Organization:  
 //
 // =====================================================================================
 
 #include "Grade.h"
 #include <vector>
+#include <QSqlQuery>
+#include <QMessageBox>
+#include <QVariant>
+#include <QString>
 using namespace std;
 
 //--------------------------------------------------------------------------------------
@@ -58,6 +62,7 @@ const vector<GradeInfo>& Grade::getInfo() const
 bool Grade::query(const Condition& Condition1, const Condition& Condition2,
                   const ConditionRelation& Relation, QString& ErrorMsg)
 {
+    QSqlQuery Grade_query;
     // if GradeInfo is not empty, then clean it
     if(m_Info.size() != 0)
         vector<GradeInfo>().swap(m_Info);
@@ -68,26 +73,99 @@ bool Grade::query(const Condition& Condition1, const Condition& Condition2,
         return true;
     }
     // if just one of the conditions is empty
-    else if(Condition1.Key == "" || Condition2.Key == "")
+    else if(Condition1.Key != "" && Condition2.Key == "")
     {
+        switch(Condition1.Field)
+        {
+        case STUDENTID:
+        {
+            if(Condition1.Relation==EQUAL){
+                Grade_query.exec("select * from grade natural join course natural join student where s_id = '"+ Condition1.Key + "';");
+            }
+            else if(Condition1.Relation==CONTAIN){
+                Grade_query.exec("select * from grade natural join course natural join student where s_id like '%"+Condition1.Key+"%';");
+            }
+        }
+            break;
+
+        case COURSENAME:
+        {
+            QSqlQuery Grade_query;
+            if(Condition1.Relation==EQUAL){
+                Grade_query.exec("select * from grade natural join course natural join student where course_name = '"+ Condition1.Key + "';");
+            }
+            else if(Condition1.Relation==CONTAIN){
+                Grade_query.exec("select * from grade natural join course natural join student where course_name like '%"+Condition1.Key+"%';");
+            }
+        }
+            break;
+
+        case COURSEID:
+        {
+            if(Condition1.Relation==EQUAL){
+                Grade_query.exec("select * from grade natural join course natural join student where course_id = '"+ Condition1.Key + "';");
+            }
+            else if(Condition1.Relation==CONTAIN){
+                Grade_query.exec("select * from grade natural join course natural join student where course_id like '%"+Condition1.Key+"%';");
+            }
+        }
+            break;
+        }
+
+        while(Grade_query.next()){
+            GradeInfo  Info1;
+            Info1.StudentID=Grade_query.value("s_id").toString();
+            Info1.StudentName=Grade_query.value("s_name").toString();
+            Info1.CourseID=Grade_query.value("course_id").toString();
+            Info1.CourseName=Grade_query.value("course_name").toString();
+            Info1.Score=(unsigned int)Grade_query.value("grade").toInt();
+            m_Info.push_back(Info1);
+        }
+        /**/
+    }
+    else if(Condition1.Key == "" && Condition2.Key != "")
+    {
+        QMessageBox::information(NULL,"warning","请先将条件填至第一条信息栏！");//偷懒^_^
     }
     // if both conditions are not empty
     else
     {
-        // those are just for test, which should be deleted after completing
-        GradeInfo Info1, Info2;
-        Info1.StudentID = TEST_STUDENTID;
-        Info1.StudentName = TEST_STUDENTNAME;
-        Info1.CourseID = QString(TEST_COURSEID) + "1";
-        Info1.CourseName = QString(TEST_COURSENAME) + "1";
-        Info1.Score = TEST_SCORE;
-        Info2.StudentID = TEST_STUDENTID;
-        Info2.StudentName = TEST_STUDENTNAME;
-        Info2.CourseID = QString(TEST_COURSEID) + "2";
-        Info2.CourseName = QString(TEST_COURSENAME) + "2";
-        Info2.Score = TEST_SCORE;
-        m_Info.push_back(Info1);
-        m_Info.push_back(Info2);
+        QString c1,c2,r11,r12,r21,r22,cr;
+        switch(Condition1.Field){
+        case STUDENTID:c1="s_id";break;
+        case COURSENAME:c1="course_name";break;
+        case COURSEID:c1="course_id";break;
+        }
+        switch(Condition2.Field){
+        case STUDENTID:c2="s_id";break;
+        case COURSENAME:c2="course_name";break;
+        case COURSEID:c2="course_id";break;
+        }
+        switch(Condition1.Relation){
+        case EQUAL:r11=" = '";r12="'";break;
+        case CONTAIN:r11=" like '%";r12="%'";break;
+        }
+        switch(Condition2.Relation){
+        case EQUAL:r21=" = '";r22="'";break;
+        case CONTAIN:r21=" like '%";r22="%'";break;
+        }
+        switch(Relation){
+        case AND:cr=" and ";break;
+        case OR:cr=" or ";break;
+        }
+        QString ss="select * from grade natural join course natural join student where "+c1+r11+Condition1.Key+r12+cr+c2+r21+Condition2.Key+r22+";";
+        //QMessageBox::information(NULL,"hint",ss);
+        Grade_query.exec(ss);
+
+        while(Grade_query.next()){
+            GradeInfo  Info1;
+            Info1.StudentID=Grade_query.value("s_id").toString();
+            Info1.StudentName=Grade_query.value("s_name").toString();
+            Info1.CourseID=Grade_query.value("course_id").toString();
+            Info1.CourseName=Grade_query.value("course_name").toString();
+            Info1.Score=(unsigned int)Grade_query.value("grade").toInt();
+            m_Info.push_back(Info1);
+        }
         return true;
     }
 }		// -----  end of method Grade::query  ----- 
@@ -119,6 +197,19 @@ bool Grade::updateGrade(const GradeInfo& Info, QString& ErrorMsg)
 //--------------------------------------------------------------------------------------
 bool Grade::insertGrade(const GradeInfo& Info, QString& ErrorMsg)
 {
+    QSqlQuery Insert_query;
+    //QMessageBox::information(NULL,"hint",Info.StudentID);
+    QString sc=QString::number(Info.Score,10);
+   // QMessageBox::information(NULL,"hint",sc);
+    bool ok=Insert_query.exec("insert into grade values ('"+Info.StudentID+"','"+Info.CourseID+"',"+sc+");");
+
+    if(ok){
+        QMessageBox::information(NULL,"hint","insert successfully");
+    }
+    else {
+        QMessageBox::information(NULL,"hint","insert failed");
+    }
+    /**/
     return true;
 }		// -----  end of method Grade::insertGrade  ----- 
 
