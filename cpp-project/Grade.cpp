@@ -121,7 +121,6 @@ bool Grade::query(const Condition& Condition1, const Condition& Condition2,
             Info1.Score=(unsigned int)Grade_query.value("grade").toInt();
             m_Info.push_back(Info1);
         }
-        /**/
     }
     else if(Condition1.Key == "" && Condition2.Key != "")
     {
@@ -154,7 +153,6 @@ bool Grade::query(const Condition& Condition1, const Condition& Condition2,
         case OR:cr=" or ";break;
         }
         QString ss="select * from grade natural join course natural join student where "+c1+r11+Condition1.Key+r12+cr+c2+r21+Condition2.Key+r22+";";
-        //QMessageBox::information(NULL,"hint",ss);
         Grade_query.exec(ss);
 
         while(Grade_query.next()){
@@ -198,9 +196,7 @@ bool Grade::updateGrade(const GradeInfo& Info, QString& ErrorMsg)
 bool Grade::insertGrade(const GradeInfo& Info, QString& ErrorMsg)
 {
     QSqlQuery Insert_query;
-    //QMessageBox::information(NULL,"hint",Info.StudentID);
     QString sc=QString::number(Info.Score,10);
-   // QMessageBox::information(NULL,"hint",sc);
     bool ok=Insert_query.exec("insert into grade values ('"+Info.StudentID+"','"+Info.CourseID+"',"+sc+");");
 
     if(ok){
@@ -209,7 +205,6 @@ bool Grade::insertGrade(const GradeInfo& Info, QString& ErrorMsg)
     else {
         QMessageBox::information(NULL,"hint","insert failed");
     }
-    /**/
     return true;
 }		// -----  end of method Grade::insertGrade  ----- 
 
