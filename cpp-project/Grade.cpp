@@ -175,6 +175,10 @@ bool Grade::query(const Condition& Condition1, const Condition& Condition2,
 //--------------------------------------------------------------------------------------
 bool Grade::deleteGrade(const GradeInfo& Info, QString& ErrorMsg)
 {
+    QSqlQuery Grade_query;
+    //Grade_query.exec("delete from grade natural join course natural join student where course_name = '"+ Condition1.Key + "';");
+    Grade_query.exec("delete from grade where s_id = '"+Info.StudentID+"' and course_id = '"+Info.CourseID+"';");
+
     return true;
 }		// -----  end of method Grade::deleteGrade  ----- 
 
@@ -185,6 +189,11 @@ bool Grade::deleteGrade(const GradeInfo& Info, QString& ErrorMsg)
 //--------------------------------------------------------------------------------------
 bool Grade::updateGrade(const GradeInfo& Info, QString& ErrorMsg)
 {
+    QString sc=QString::number(Info.Score,10);
+    QSqlQuery Grade_query;
+    //Grade_query.exec("delete from grade natural join course natural join student where course_name = '"+ Condition1.Key + "';");
+    Grade_query.exec("update grade set grade = "+sc+" where s_id = '"+Info.StudentID+"' and course_id = '"+Info.CourseID+"';");
+
     return true;
 }		// -----  end of method Grade::updateGrade  ----- 
 

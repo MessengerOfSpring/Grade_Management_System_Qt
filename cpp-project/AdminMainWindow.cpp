@@ -1,4 +1,4 @@
-ï»¿#include <vector>
+#include <vector>
 #include <QDateTime>
 #include <QMessageBox>
 #include "AdminMainWindow.h"
@@ -18,11 +18,11 @@ AdminMainWindow::AdminMainWindow(QString ID, QWidget *parent) :
     ui(new Ui::AdminMainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle(QString::fromLocal8Bit("å­¦ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ"));
+    setWindowTitle(QString::fromLocal8Bit("Ñ§Éú³É¼¨¹ÜÀíÏµÍ³"));
 
     // set tablewidget
     QStringList Header;
-    Header << QString::fromLocal8Bit("å­¦å·") << QString::fromLocal8Bit("å§“å") << QString::fromLocal8Bit("è¯¾ç¨‹ä»£ç ") << QString::fromLocal8Bit("è¯¾ç¨‹åç§°") << QString::fromLocal8Bit("æˆç»©");
+    Header << QString::fromLocal8Bit("Ñ§ºÅ") << QString::fromLocal8Bit("ĞÕÃû") << QString::fromLocal8Bit("¿Î³Ì´úÂë") << QString::fromLocal8Bit("¿Î³ÌÃû³Æ") << QString::fromLocal8Bit("³É¼¨");
     ui->tableWidget->setColumnCount(5);         // 5 columns
     ui->tableWidget->setHorizontalHeaderLabels(Header); // set horizontal header labels
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -32,15 +32,15 @@ AdminMainWindow::AdminMainWindow(QString ID, QWidget *parent) :
     ui->tableWidget->horizontalHeader()->setSectionsClickable(false); // horizontal header can't be clicked
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows); // set selection only rows
 
-    QString LabelInfo = ID + QString::fromLocal8Bit("è€å¸ˆï¼Œæ¬¢è¿æ¥åˆ°å­¦ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿï¼ä»Šå¤©æ˜¯") +
+    QString LabelInfo = ID + QString::fromLocal8Bit("ÀÏÊ¦£¬»¶Ó­À´µ½Ñ§Éú³É¼¨¹ÜÀíÏµÍ³£¡½ñÌìÊÇ") +
             QDate::currentDate().toString("yyyy-MM-dd");
     ui->label->setText(LabelInfo);
     ui->label->adjustSize();
 
     ui->tableWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     m_ContextMenu = new QMenu(ui->tableWidget);
-    m_DeleteAction = new QAction(QString::fromLocal8Bit("åˆ é™¤æˆç»©"), this);
-    m_EditAction = new QAction(QString::fromLocal8Bit("ç¼–è¾‘æˆç»©"), this);
+    m_DeleteAction = new QAction(QString::fromLocal8Bit("É¾³ı³É¼¨"), this);
+    m_EditAction = new QAction(QString::fromLocal8Bit("±à¼­³É¼¨"), this);
     connect(ui->tableWidget, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenu(QPoint)));
     connect(m_DeleteAction, SIGNAL(triggered()), this, SLOT(deleteTuple()));
     connect(m_EditAction, SIGNAL(triggered()), this, SLOT(editTuple()));
@@ -75,7 +75,7 @@ void AdminMainWindow::showGradeInfo()
     // If the result of query is empty, then show nothing
     if(Info.size() == 0)
     {
-        QMessageBox::information(this, QString::fromLocal8Bit("æç¤º"), QString::fromLocal8Bit("æ²¡æœ‰æ‚¨è¦æŸ¥æ‰¾çš„æˆç»©ï¼"));
+        QMessageBox::information(this, QString::fromLocal8Bit("ÌáÊ¾"), QString::fromLocal8Bit("Ã»ÓĞÄúÒª²éÕÒµÄ³É¼¨£¡"));
         return;
     }
 
@@ -128,7 +128,7 @@ void AdminMainWindow::on_Find_clicked()
         if(m_Grade->query(condition1, condition2, CRelation, ErrorMsg))
             showGradeInfo();
         else
-            QMessageBox::warning(this, QString::fromLocal8Bit("è­¦å‘Š"), ErrorMsg);
+            QMessageBox::warning(this, QString::fromLocal8Bit("¾¯¸æ"), ErrorMsg);
     }
 }
 
@@ -140,7 +140,7 @@ void AdminMainWindow::on_Add_clicked()
         GradeInfo info = add.getGradeInfo();
         QString ErrorMsg;
         if(!m_Grade->insertGrade(info, ErrorMsg))
-            QMessageBox::warning(this, QString::fromLocal8Bit("è­¦å‘Š"), ErrorMsg);
+            QMessageBox::warning(this, QString::fromLocal8Bit("¾¯¸æ"), ErrorMsg);
     }
 }
 
@@ -176,14 +176,14 @@ void AdminMainWindow::editTuple()
             ui->tableWidget->setItem(Row, 4, Score);
         }
         else
-            QMessageBox::warning(this, QString::fromLocal8Bit("è­¦å‘Š"), ErrorMsg);
+            QMessageBox::warning(this, QString::fromLocal8Bit("¾¯¸æ"), ErrorMsg);
     }
 }
 
 void AdminMainWindow::deleteTuple()
 {
     QMessageBox::StandardButton rb =
-            QMessageBox::warning(this, QString::fromLocal8Bit("è­¦å‘Š"), QString::fromLocal8Bit("æ‚¨ç¡®å®šè¦åˆ é™¤è¿™æ¡æˆç»©å—ï¼Ÿåˆ é™¤åå°†æ— æ³•æ’¤é”€ï¼"),
+            QMessageBox::warning(this, QString::fromLocal8Bit("¾¯¸æ"), QString::fromLocal8Bit("ÄúÈ·¶¨ÒªÉ¾³ıÕâÌõ³É¼¨Âğ£¿É¾³ıºó½«ÎŞ·¨³·Ïú£¡"),
                                  QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Cancel);
     // if push "Cancel", then do nothing
     if(rb == QMessageBox::Cancel)
@@ -203,7 +203,7 @@ void AdminMainWindow::deleteTuple()
     if(m_Grade->deleteGrade(info, ErrorMsg)) // Delete from database
         ui->tableWidget->removeRow(Row); // Delete from the table
     else
-        QMessageBox::warning(this, QString::fromLocal8Bit("è­¦å‘Š"), ErrorMsg);
+        QMessageBox::warning(this, QString::fromLocal8Bit("¾¯¸æ"), ErrorMsg);
 }
 
 /*Details for Enroll*/

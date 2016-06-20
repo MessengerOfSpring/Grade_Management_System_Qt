@@ -1,4 +1,4 @@
-﻿#include "LoginDlg.h"
+#include "LoginDlg.h"
 #include "StudentMainWindow.h"
 #include "AdminMainWindow.h"
 #include <QApplication>

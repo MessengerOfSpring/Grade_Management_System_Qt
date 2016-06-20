@@ -1,4 +1,4 @@
-ï»¿#include "AddDlg.h"
+#include "AddDlg.h"
 #include "ui_AddDlg.h"
 #include <QMessageBox>
 #include <QString>
@@ -8,7 +8,7 @@ AddDlg::AddDlg(QWidget *parent) :
     ui(new Ui::AddDlg)
 {
     ui->setupUi(this);
-    setWindowTitle(QString::fromLocal8Bit("æ·»åŠ æˆç»©"));
+    setWindowTitle(QString::fromLocal8Bit("Ìí¼Ó³É¼¨"));
     m_GradeInfo = new GradeInfo;
 }
 
@@ -36,17 +36,17 @@ void AddDlg::on_Ok_clicked()
     m_GradeInfo->Score     = ui->Score->text().toUInt(&Ok, 10);
     if(m_GradeInfo->StudentID == "")
     {
-        QMessageBox::warning(this, QString::fromLocal8Bit("è­¦å‘Š"), QString::fromLocal8Bit("å­¦ç”Ÿå­¦å·ä¸ºå¿…å¡«ï¼"));
+        QMessageBox::warning(this, QString::fromLocal8Bit("¾¯¸æ"), QString::fromLocal8Bit("Ñ§ÉúÑ§ºÅÎª±ØÌî£¡"));
         return;
     }
     else if(m_GradeInfo->CourseID  == "")
     {
-        QMessageBox::warning(this, QString::fromLocal8Bit("è­¦å‘Š"), QString::fromLocal8Bit("è¯¾ç¨‹ä»£ç ä¸ºå¿…å¡«ï¼"));
+        QMessageBox::warning(this, QString::fromLocal8Bit("¾¯¸æ"), QString::fromLocal8Bit("¿Î³Ì´úÂëÎª±ØÌî£¡"));
         return;
     }
     else if(!Ok || m_GradeInfo->Score > 100)
     {
-        QMessageBox::warning(this, QString::fromLocal8Bit("è­¦å‘Š"), QString::fromLocal8Bit("æˆç»©ä¸ºå¿…å¡«ä¸”ä¸º0ï½100çš„æ•´æ•°ï¼"));
+        QMessageBox::warning(this, QString::fromLocal8Bit("¾¯¸æ"), QString::fromLocal8Bit("³É¼¨Îª±ØÌîÇÒÎª0¡«100µÄÕûÊı£¡"));
         return;
     }
 

@@ -1,4 +1,4 @@
-Ôªø#include "FindDlg.h"
+#include "FindDlg.h"
 #include "ui_FindDlg.h"
 
 FindDlg::FindDlg(QWidget *parent) :
@@ -7,11 +7,11 @@ FindDlg::FindDlg(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setWindowTitle(QString::fromLocal8Bit("Êü•ÊâæÊàêÁª©"));
+    setWindowTitle(QString::fromLocal8Bit("≤È’“≥…º®"));
 
     QStringList Fields, FieldRelations;
-    Fields << QString::fromLocal8Bit("Â≠¶Âè∑") << QString::fromLocal8Bit("ËØæÁ®ãÂêçÁß∞") << QString::fromLocal8Bit("ËØæÁ®ã‰ª£Á†Å");
-    FieldRelations <<QString::fromLocal8Bit("Á≠â‰∫é") << QString::fromLocal8Bit("ÂåÖÂê´");
+    Fields << QString::fromLocal8Bit("—ß∫≈") << QString::fromLocal8Bit("øŒ≥Ã√˚≥∆") << QString::fromLocal8Bit("øŒ≥Ã¥˙¬Î");
+    FieldRelations <<QString::fromLocal8Bit("µ»”⁄") << QString::fromLocal8Bit("∞¸∫¨");
     ui->Field1->addItems(Fields);
     ui->Field2->addItems(Fields);
     ui->FieldRelation1->addItems(FieldRelations);
@@ -32,7 +32,7 @@ FindDlg::~FindDlg()
 //--------------------------------------------------------------------------------------
 const Condition& FindDlg::getCondition1() const
 {
-	return m_Condition1;
+    return m_Condition1;
 }		// -----  end of accessor FindDlg::getCondition1  ----- 
 
 //--------------------------------------------------------------------------------------

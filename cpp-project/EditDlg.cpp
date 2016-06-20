@@ -1,4 +1,4 @@
-ï»¿#include "Grade.h"
+#include "Grade.h"
 #include "EditDlg.h"
 #include "ui_EditDlg.h"
 #include <QMessageBox>
@@ -9,8 +9,8 @@ EditDlg::EditDlg(const QString& StudentName, const QString& CourseName, QWidget 
     ui(new Ui::EditDlg)
 {
     ui->setupUi(this);
-    setWindowTitle(QString::fromLocal8Bit("ç¼–è¾‘æˆç»©"));
-    ui->label->setText(QString::fromLocal8Bit("è¯·è¾“å…¥") + StudentName + QString::fromLocal8Bit("åŒå­¦åœ¨") + CourseName + QString::fromLocal8Bit("è¯¾ç¨‹ä¸­æ–°çš„æˆç»©:"));
+    setWindowTitle(QString::fromLocal8Bit("±à¼­³É¼¨"));
+    ui->label->setText(QString::fromLocal8Bit("ÇëÊäÈë") + StudentName + QString::fromLocal8Bit("Í¬Ñ§ÔÚ") + CourseName + QString::fromLocal8Bit("¿Î³ÌÖÐÐÂµÄ³É¼¨:"));
     ui->label->adjustSize();
 }
 
@@ -34,7 +34,7 @@ void EditDlg::on_Ok_clicked()
     m_NewScore = ui->NewScore->text().toUInt(&Ok, 10);
     if(!Ok || m_NewScore > 100)
     {
-        QMessageBox::warning(this, QString::fromLocal8Bit("è­¦å‘Š"), QString::fromLocal8Bit("æˆç»©å¿…é¡»ä¸º0ï½ž100çš„æ•´æ•°ï¼è¯·é‡æ–°è¾“å…¥"));
+        QMessageBox::warning(this, QString::fromLocal8Bit("¾¯¸æ"), QString::fromLocal8Bit("³É¼¨±ØÐëÎª0¡«100µÄÕûÊý£¡ÇëÖØÐÂÊäÈë"));
         ui->NewScore->clear();
         return;
     }

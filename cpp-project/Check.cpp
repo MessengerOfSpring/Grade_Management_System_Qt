@@ -1,4 +1,4 @@
-ï»¿// =====================================================================================
+// =====================================================================================
 //
 //       Filename:  Check.cpp
 //
@@ -20,6 +20,8 @@
 #include <QSqlQuery>
 #include <QMessageBox>
 #include <QString>
+#include <QVariant>
+#include <QDebug>
 
 // ===  FUNCTION  ======================================================================
 //         Name:  Check
@@ -35,7 +37,7 @@ bool Check(const QString& ID, const QString& Password, const LoginType Type, QSt
             query1.exec("select s_id from student where s_id = '"+ID+"' and psw = '"
                         +Password+"' and s_degree = 'undergraduate'");
             if(!query1.next()){
-                ErrorMsg=QString::fromLocal8Bit("ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯");
+                ErrorMsg=QString::fromLocal8Bit("ÓÃ»§Ãû»òÃÜÂë´íÎó");
                 return false;
             }
             else
@@ -47,7 +49,7 @@ bool Check(const QString& ID, const QString& Password, const LoginType Type, QSt
             query1.exec("select s_id from student where s_id = '"+ID+"' and psw = '"
                         +Password+"' and s_degree = 'master'");
             if(!query1.next()){
-                ErrorMsg=QString::fromLocal8Bit("ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯");
+                ErrorMsg=QString::fromLocal8Bit("ÓÃ»§Ãû»òÃÜÂë´íÎó");
                 return false;
             }
             else
@@ -59,7 +61,7 @@ bool Check(const QString& ID, const QString& Password, const LoginType Type, QSt
             query1.exec("select s_id from student where s_id = '"+ID+"' and psw = '"
                         +Password+"' and s_degree = 'phd'");
             if(!query1.next()){
-                ErrorMsg=QString::fromLocal8Bit("ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯");
+                ErrorMsg=QString::fromLocal8Bit("ÓÃ»§Ãû»òÃÜÂë´íÎó");
                 return false;
             }
             else
@@ -70,7 +72,7 @@ bool Check(const QString& ID, const QString& Password, const LoginType Type, QSt
             QSqlQuery query1;
             query1.exec("select admin_id from admin where admin_id = '"+ID+"' and psw = '"+Password+"'");
             if(!query1.next()){
-                ErrorMsg=QString::fromLocal8Bit("ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯");
+                ErrorMsg=QString::fromLocal8Bit("ÓÃ»§Ãû»òÃÜÂë´íÎó");
                 return false;
             }
             else
@@ -78,7 +80,7 @@ bool Check(const QString& ID, const QString& Password, const LoginType Type, QSt
         } break;
         default:
         {
-            ErrorMsg = QString::fromLocal8Bit("è¯·é€‰æ‹©ç™»å½•ç±»å‹ï¼");
+            ErrorMsg = QString::fromLocal8Bit("ÇëÑ¡ÔñµÇÂ¼ÀàĞÍ£¡");
             return false;
         } break;
     }

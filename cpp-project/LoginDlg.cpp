@@ -1,4 +1,4 @@
-ï»¿#include <QMessageBox>
+#include <QMessageBox>
 #include <QLineEdit>
 #include <QLabel>
 #include <QRadioButton>
@@ -26,17 +26,17 @@ LoginDlg::LoginDlg(QWidget *parent) :
     db.setHostName("localhost");
     db.setDatabaseName("grade_manage");
     db.setUserName("root");
-    db.setPassword("1996219");//ä½ çš„mysqlå¯†ç å¯èƒ½æ˜¯ç©º***********
+    db.setPassword("root");//ÄãµÄmysqlÃÜÂë¿ÉÄÜÊÇ¿Õ***********
     bool ok=db.open();
     if(ok){
-        //QMessageBox::information(NULL,"æç¤º","è¿žæŽ¥æ•°æ®åº“æˆåŠŸ");
+        //QMessageBox::information(NULL,"ÌáÊ¾","Á¬½ÓÊý¾Ý¿â³É¹¦");
     }
     else{
-        QMessageBox::information(NULL,QString::fromLocal8Bit("æç¤º"),QString::fromLocal8Bit("è¿žæŽ¥æ•°æ®åº“å¤±è´¥"));
+        QMessageBox::information(NULL,QString::fromLocal8Bit("ÌáÊ¾"),QString::fromLocal8Bit("Á¬½ÓÊý¾Ý¿âÊ§°Ü"));
         qApp->quit();
     }
 
-    setWindowTitle(QString::fromLocal8Bit(" å­¦ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ"));
+    setWindowTitle(QString::fromLocal8Bit(" Ñ§Éú³É¼¨¹ÜÀíÏµÍ³"));
 
     // Do not show password
     ui->Password->setEchoMode(QLineEdit::Password);
@@ -67,7 +67,7 @@ void LoginDlg::on_Login_clicked()
     // if ID or password is not valid
     else
     {
-        QMessageBox::warning(this, QString::fromLocal8Bit("è­¦å‘Š"),ErrorMsg);
+        QMessageBox::warning(this, QString::fromLocal8Bit("¾¯¸æ"),ErrorMsg);
         m_Info->ID = "";
         m_Info->Password = "";
         ui->ID->clear();

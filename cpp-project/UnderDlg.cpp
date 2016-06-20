@@ -1,4 +1,4 @@
-ï»¿// =====================================================================================
+// =====================================================================================
 //
 //       Filename:  UnderDlg.cpp
 //
@@ -25,7 +25,7 @@ UnderDlg::UnderDlg(QWidget *parent) :
     ui(new Ui::UnderDlg)
 {
     ui->setupUi(this);
-    setWindowTitle(QString::fromLocal8Bit("æœ¬ç§‘ç”Ÿæ³¨å†Œ"));
+    setWindowTitle(QString::fromLocal8Bit("±¾¿ÆÉú×¢²á"));
     setWindowIcon(QIcon(":/Menu/images/under.png"));
     connect(ui->under_ok, SIGNAL(clicked(bool)),this,SLOT(on_btnOK()));
     connect(ui->under_cancel,SIGNAL(clicked(bool)),this,SLOT(on_btnCancel()));
@@ -49,27 +49,27 @@ void UnderDlg::on_btnOK()
     QSqlQuery Under_query;
     if(ID.isEmpty())
     {
-        QMessageBox::information(this,QString::fromLocal8Bit("æç¤º"),QString::fromLocal8Bit("è´¦å·ä¸èƒ½ä¸ºç©º"));
+        QMessageBox::information(this,QString::fromLocal8Bit("ÌáÊ¾"),QString::fromLocal8Bit("ÕËºÅ²»ÄÜÎª¿Õ"));
         return;
     }
     else if(Password.isEmpty())
     {
-        QMessageBox::information(this,QString::fromLocal8Bit("æç¤º"),QString::fromLocal8Bit("å¯†ç ä¸èƒ½ä¸ºç©º"));
+        QMessageBox::information(this,QString::fromLocal8Bit("ÌáÊ¾"),QString::fromLocal8Bit("ÃÜÂë²»ÄÜÎª¿Õ"));
         return;
     }
     else if(Name.isEmpty())
     {
-        QMessageBox::information(this,QString::fromLocal8Bit("æç¤º"),QString::fromLocal8Bit("åç§°ä¸èƒ½ä¸ºç©º"));
+        QMessageBox::information(this,QString::fromLocal8Bit("ÌáÊ¾"),QString::fromLocal8Bit("Ãû³Æ²»ÄÜÎª¿Õ"));
         return;
     }
     else if(!Under_query.exec("insert into student values('"+ID+"','"+Password+"','"+Name+"','1');"))
     {
-        QMessageBox::information(this,QString::fromLocal8Bit("æç¤º"),QString::fromLocal8Bit("æ³¨å†Œå¤±è´¥"));
+        QMessageBox::information(this,QString::fromLocal8Bit("ÌáÊ¾"),QString::fromLocal8Bit("×¢²áÊ§°Ü"));
         return;
      }
     else
     {
-        QMessageBox::information(this,QString::fromLocal8Bit("æç¤º"),QString::fromLocal8Bit("æ³¨å†ŒæˆåŠŸ"));
+        QMessageBox::information(this,QString::fromLocal8Bit("ÌáÊ¾"),QString::fromLocal8Bit("×¢²á³É¹¦"));
         accept();
     }
 

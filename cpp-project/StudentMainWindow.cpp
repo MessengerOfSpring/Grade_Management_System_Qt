@@ -1,4 +1,4 @@
-ï»¿#include <QDateTime>
+#include <QDateTime>
 #include <vector>
 #include "Grade.h"
 #include "StudentMainWindow.h"
@@ -9,11 +9,11 @@ StudentMainWindow::StudentMainWindow(QString ID, QWidget *parent) :
     ui(new Ui::StudentMainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle(QString::fromLocal8Bit("å­¦ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ"));
+    setWindowTitle(QString::fromLocal8Bit("Ñ§Éú³É¼¨¹ÜÀíÏµÍ³"));
 
     // set tablewidget
     QStringList Header;
-    Header << QString::fromLocal8Bit("è¯¾ç¨‹å·") << QString::fromLocal8Bit("è¯¾ç¨‹åç§°") << QString::fromLocal8Bit("æˆç»©");
+    Header << QString::fromLocal8Bit("¿Î³ÌºÅ") << QString::fromLocal8Bit("¿Î³ÌÃû³Æ") << QString::fromLocal8Bit("³É¼¨");
     ui->tableWidget->setColumnCount(3);         // 3 columns
     ui->tableWidget->setHorizontalHeaderLabels(Header); // set horizontal header labels
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -23,7 +23,7 @@ StudentMainWindow::StudentMainWindow(QString ID, QWidget *parent) :
     ui->tableWidget->horizontalHeader()->setSectionsClickable(false); // horizontal header can't be clicked
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows); // set selection only rows
 
-    QString LabelInfo = ID + QString::fromLocal8Bit("åŒå­¦ï¼Œæ¬¢è¿æ¥åˆ°å­¦ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿï¼ä»Šå¤©æ˜¯") +
+    QString LabelInfo = ID + QString::fromLocal8Bit("Í¬Ñ§£¬»¶Ó­À´µ½Ñ§Éú³É¼¨¹ÜÀíÏµÍ³£¡½ñÌìÊÇ") +
            QDate::currentDate().toString("yyyy-MM-dd");
     ui->label->setText(LabelInfo);
     ui->label->adjustSize();
